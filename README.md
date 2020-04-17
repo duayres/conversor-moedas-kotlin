@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/duayres/conversor-moedas-kotlin.svg?branch=master)](https://travis-ci.org/duayres/conversor-moedas-kotlin)
 # conversor-moedas-kotlin
 
 ## Resumo
