@@ -27,7 +27,7 @@ buildscript {
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
-mainClassName = "io.realworld.app.AppKt"
+mainClassName = "br.duayres.app.ApplicationKt"
 
 repositories {
     mavenCentral()
