@@ -4,8 +4,8 @@ import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 
 object ApplicationConfig {
-    fun start(): Javalin = Javalin
+    fun start(port:Int = 7000): Javalin = Javalin
         .create()
-        .start(7000)
+        .start(port)
         //@TODO .routes {} //in a separated file maybe?!?
 }
