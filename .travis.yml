@@ -1,7 +1,12 @@
 language: java
-
 matrix:
   include:
-    - os: linux
-      sudo: required
-      jdk: openjdk8
+  - os: linux
+    sudo: required
+    jdk: openjdk8
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: QZkRmBmAgtGcYJiWeHPJp+wbO1b8PqqatHA5hyvPYBTTKK11Bmu5mrB/gr4NOBrOH7KV9ZNHirV9F9X1zrtOQRj/rZ84RAGnDXrAiYNaM/vYmavl5sOQA3PFYnyhJwIY2c4Jm93U/HMekM+dCU4FKnCFKQcPVvi/asfkQvFsR4V87O9ySzM2xpKavlkk2RFNeydzdoNEL7c4F949RZZBYiQalXnbKrZrXacYTuE8zvQPivatCZG8t6Gcb2jy0aRvtWSzIaeWEsnGt1Vg1czcknMKx/aYx1GFLoP1vBHL1a6e+aY45VGNQDh4E/iqLHNdREt5DEX47/+WdfTxNeaMOV1QgyRQ2Bzq60sK1yKRF5NLvyILMIg5heCcpkVE/pJEyHpjBi8zp6nhbA3Zoy8Za0xTN3loJ2Ns2e5KgQh8lqMWkxNDsL2Oqg/wKZEIie4g0fe9Yd0ALwqJpFPEXiP9gagJbC1WYD/MVo2OEKDY8+yls+WnCkYjx7v32SMNRngLmlzQs838YMCFZy+cPftcjXJCANuXyYmzYa97acZaIlXIqp+GgSODjPJOOjVdHh2TnCnUrOCJuv26QQgCZiBp8jv05NqaTmyGm2kyBVajnEuBYg30e/aaYqMK1AiTfTPraMzqRK/W1BTDe1pNBSzjDj7ackAfsJe58i+L5cgZX7Q=
+  app: kotlin-currency
