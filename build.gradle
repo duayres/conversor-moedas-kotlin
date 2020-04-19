@@ -31,6 +31,9 @@ apply plugin: 'application'
 apply plugin: 'idea'
 mainClassName = "br.duayres.app.ApplicationKt"
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
 repositories {
     mavenCentral()
     jcenter()
