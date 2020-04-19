@@ -31,8 +31,9 @@ apply plugin: 'application'
 apply plugin: 'idea'
 mainClassName = "br.duayres.app.ApplicationKt"
 
-task stage(dependsOn: ['build', 'clean'])
+task stage(dependsOn: ['build', 'clean', 'fatJar'])
 build.mustRunAfter clean
+//fatJar.mustRunAfter build
 
 repositories {
     mavenCentral()
@@ -54,6 +55,17 @@ dependencies {
 
     testCompile "junit:junit:$junit_version"
     testCompile "com.mashape.unirest:unirest-java:$unirest_version"
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Kotlin currency converter demo',
+                'Implementation-Version': version,
+                'Main-Class': 'br.duayres.app.ApplicationKt'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 compileKotlin {
