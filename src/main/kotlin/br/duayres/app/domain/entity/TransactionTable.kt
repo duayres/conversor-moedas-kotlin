@@ -1,10 +1,10 @@
 package br.duayres.app.domain.entity
 
+import org.jetbrains.exposed.dao.LongIdTable
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.*
 
-object TransactionTable : Table("transaction"){
-    val id = long("id").autoIncrement().primaryKey()//entityId??
+object TransactionTable : LongIdTable("transaction"){
     val userId = long("user_id")
     val originCurrency = varchar("origin_currency",3)
     val originAmount = double("origin_amount")

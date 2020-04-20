@@ -12,6 +12,7 @@ class TransactionController() {
                 .check({ it.isNotBlank() })
                 .getOrThrow().also { userId ->
                     transactionService.getTransactionsById(userId.toLong())
+                            .let { ctx.json(it) }
                 }
     }
 
