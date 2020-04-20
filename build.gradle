@@ -33,7 +33,6 @@ mainClassName = "br.duayres.app.ApplicationKt"
 
 task stage(dependsOn: ['build', 'clean', 'fatJar'])
 build.mustRunAfter clean
-//fatJar.mustRunAfter build
 
 repositories {
     mavenCentral()
