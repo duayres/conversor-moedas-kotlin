@@ -9,7 +9,7 @@ class TransactionController() {
     fun get(ctx:Context){
         ctx.validatedPathParam("user-id")
                 .check({ it.isNotBlank() })
-                .getOrThrow().also { userId ->
+                .get().also { userId ->
                     transactionService.getTransactionsById(userId.toLong())
                             .let { ctx.json(it) }
                 }
@@ -20,16 +20,16 @@ class TransactionController() {
         var fromCurrency: String = ctx.validatedPathParam("origin")
                 .check({ it.isNotBlank() })
                 .matches(regexPattern)
-                .getOrThrow()
+                .get()
         var toCurrency: String = ctx.validatedPathParam("destination")
                 .check({ it.isNotBlank() })
                 .matches(regexPattern)
-                .getOrThrow()
+                .get()
 
-        var value: String = ctx.validatedQueryParam("value")//ctx.validatedFormParam("value")
+        var value: String = ctx.validatedQueryParam("amount")
                 .check({ it.isNotBlank() })
                 .check({ it.isFloat() })
-                .getOrThrow()
+                .get()
 
         transactionService.convertAndPersist(fromCurrency, toCurrency, value.toDouble(),ctx)?.let { ctx.json(it) }
     }
