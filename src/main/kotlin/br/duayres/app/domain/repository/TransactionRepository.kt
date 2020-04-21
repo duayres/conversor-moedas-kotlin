@@ -7,13 +7,13 @@ import br.duayres.app.infra.utils.CopyObjectUtils
 import br.duayres.app.infra.utils.CopyObjectUtils.copyPropsFrom
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object TransactionRepository {
     fun save(transaction:Transaction):Transaction{
         val newId = transaction {
-            TransactionTable.insert {
-                //it[id] = transaction.
+            TransactionTable.insertAndGetId {
                 it[userId] = 1L;//@fixme when auth is in place
                 it[originCurrency] = transaction.originCurrency
                 it[originAmount] = transaction.originAmount
@@ -21,11 +21,11 @@ object TransactionRepository {
                 it[destinationAmount] = transaction.destinationAmount;
                 it[conversionRate] = transaction.conversionRate
                 it[date] = transaction.date
-            }
+            }.value
         }
 
         var savedTransaction = transaction;
-        //savedTransaction.id = newId as Long;
+        savedTransaction.id = newId as Long;
         return savedTransaction
     }
 
@@ -35,7 +35,9 @@ object TransactionRepository {
             val transactionRows = TransactionTableRow.find { TransactionTable.userId eq userId }.toList();
 
             for (transaction in transactionRows) {
+                println(transaction.id)
                 var copyTo = Transaction()
+                copyTo.id = transaction.idVal
                 copyTo.copyPropsFrom(transaction)
                 transactions.add(copyTo);
             }

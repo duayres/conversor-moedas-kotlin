@@ -16,4 +16,5 @@ class TransactionTableRow (id: EntityID<Long>) : LongEntity(id) {
     var destinationAmount by TransactionTable.destinationAmount
     var conversionRate by TransactionTable.conversionRate
     var date by TransactionTable.date
+    var idVal = id.value;
 }
