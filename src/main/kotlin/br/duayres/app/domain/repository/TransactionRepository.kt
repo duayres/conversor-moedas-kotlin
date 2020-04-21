@@ -14,7 +14,6 @@ object TransactionRepository {
     fun save(transaction:Transaction):Transaction{
         val newId = transaction {
             TransactionTable.insertAndGetId {
-                //it[id] = transaction.
                 it[userId] = 1L;//@fixme when auth is in place
                 it[originCurrency] = transaction.originCurrency
                 it[originAmount] = transaction.originAmount
@@ -36,7 +35,9 @@ object TransactionRepository {
             val transactionRows = TransactionTableRow.find { TransactionTable.userId eq userId }.toList();
 
             for (transaction in transactionRows) {
+                println(transaction.id)
                 var copyTo = Transaction()
+                copyTo.id = transaction.idVal
                 copyTo.copyPropsFrom(transaction)
                 transactions.add(copyTo);
             }
