@@ -1,6 +1,5 @@
 package br.duayres.app.domain.controller
 
-import br.duayres.app.domain.ExchangeRateResource
 import br.duayres.app.domain.service.TransactionService
 import io.javalin.Context
 import org.koin.ext.isFloat
@@ -12,6 +11,7 @@ class TransactionController() {
                 .check({ it.isNotBlank() })
                 .getOrThrow().also { userId ->
                     transactionService.getTransactionsById(userId.toLong())
+                            .let { ctx.json(it) }
                 }
     }
 
@@ -31,6 +31,6 @@ class TransactionController() {
                 .check({ it.isFloat() })
                 .getOrThrow()
 
-        transactionService.convertAndPersist(fromCurrency, toCurrency, value.toDouble())?.let { ctx.json(it) }
+        transactionService.convertAndPersist(fromCurrency, toCurrency, value.toDouble(),ctx)?.let { ctx.json(it) }
     }
 }

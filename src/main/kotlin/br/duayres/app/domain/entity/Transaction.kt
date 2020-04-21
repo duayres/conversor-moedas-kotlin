@@ -7,10 +7,13 @@ import org.joda.time.LocalDateTime
 
 data class Transaction(
         var id: Long = 0,
-        val userId: Long = 0,
-        val originCurrency: String,
-        val originAmount: Double,
-        val destinationCurrency: String,
-        val destinationAmount: Double,
-        val conversionRate: Double,
-        val date: DateTime)
+        var userId: Long = 0,
+        var originCurrency: String,
+        var originAmount: Double,
+        var destinationCurrency: String,
+        var destinationAmount: Double,
+        var conversionRate: Double,
+        var date: DateTime){
+            constructor() : this(id=0,userId = 0, originAmount = 0.0, originCurrency = "", destinationAmount = 0.0,
+                            destinationCurrency = "", date = DateTime.now(), conversionRate = 0.0)
+}
