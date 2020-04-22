@@ -9,6 +9,9 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.joda.time.DateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 object TransactionRepository {
     fun save(transaction:Transaction):Transaction{
@@ -20,7 +23,7 @@ object TransactionRepository {
                 it[destinationCurrency] = transaction.destinationCurrency
                 it[destinationAmount] = transaction.destinationAmount;
                 it[conversionRate] = transaction.conversionRate
-                it[date] = transaction.date
+                it[date] = DateTime(transaction.date)
             }.value
         }
 
@@ -35,7 +38,6 @@ object TransactionRepository {
             val transactionRows = TransactionTableRow.find { TransactionTable.userId eq userId }.toList();
 
             for (transaction in transactionRows) {
-                println(transaction.id)
                 var copyTo = Transaction()
                 copyTo.id = transaction.idVal
                 copyTo.copyPropsFrom(transaction)
