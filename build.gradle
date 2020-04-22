@@ -48,6 +48,7 @@ dependencies {
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson_version"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:$jackson_version"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
     compile "org.slf4j:slf4j-simple:$slf4j_version"
     compile "org.koin:koin-core:$koin_version"

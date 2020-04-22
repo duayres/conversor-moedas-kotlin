@@ -5,8 +5,17 @@ import br.duayres.app.application.ConversionResult
 import br.duayres.app.domain.ExchangeRateResource
 import br.duayres.app.domain.entity.Transaction
 import br.duayres.app.domain.repository.TransactionRepository
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.Context
 import org.joda.time.DateTime
+import java.text.SimpleDateFormat
+
 
 class TransactionService {
     fun getTransactionsById(userId:Long):List<Transaction>{
@@ -21,6 +30,7 @@ class TransactionService {
                 var transaction = Transaction(conversionRate = conversionRate, date = DateTime.now(),
                         originCurrency = currencyFrom, destinationCurrency = currencyTo,
                         originAmount = value.toDouble(), destinationAmount = conversionRate * value)
+                println(jacksonObjectMapper().writeValueAsString(transaction))
                 //@todo change to bigdecimal
                 return TransactionRepository.save(transaction);
             }

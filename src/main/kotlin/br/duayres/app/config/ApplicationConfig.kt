@@ -1,7 +1,12 @@
 package br.duayres.app.config
 
 import br.duayres.app.domain.Routes
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
@@ -23,7 +28,9 @@ object ApplicationConfig {
                 jacksonObjectMapper()
                         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                         .setDateFormat(dateFormat)
-                        //.configure(SerializationFeature.WRITE_DATES_WITH_ZONE_ID, true)
+                        //.registerModule(KotlinModule())
+                        .registerModule(JodaModule())
+                        .configure(SerializationFeature.WRITE_DATES_WITH_ZONE_ID, false)
         )
     }
 }
