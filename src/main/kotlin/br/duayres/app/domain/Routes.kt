@@ -1,6 +1,6 @@
 package br.duayres.app.domain
 
-import br.duayres.app.domain.controller.TransactionController
+import br.duayres.app.application.web.controller.TransactionController
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 

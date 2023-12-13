@@ -30,7 +30,6 @@ class TransactionService {
                 var transaction = Transaction(conversionRate = conversionRate, date = DateTime.now(),
                         originCurrency = currencyFrom, destinationCurrency = currencyTo,
                         originAmount = value.toDouble(), destinationAmount = conversionRate * value)
-                println(jacksonObjectMapper().writeValueAsString(transaction))
                 //@todo change to bigdecimal
                 return TransactionRepository.save(transaction);
             }
